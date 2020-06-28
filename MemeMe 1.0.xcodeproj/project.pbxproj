@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7828E2A924A88C6300012D6A /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7828E2A824A88C6300012D6A /* Meme.swift */; };
 		7869843D24A3F841002618E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7869843C24A3F841002618E1 /* AppDelegate.swift */; };
 		7869843F24A3F841002618E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7869843E24A3F841002618E1 /* ViewController.swift */; };
 		7869844224A3F841002618E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7869844024A3F841002618E1 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7828E2A824A88C6300012D6A /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		7869843924A3F841002618E1 /* MemeMe 1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MemeMe 1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7869843C24A3F841002618E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7869843E24A3F841002618E1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				7869843C24A3F841002618E1 /* AppDelegate.swift */,
 				7869843E24A3F841002618E1 /* ViewController.swift */,
+				7828E2A824A88C6300012D6A /* Meme.swift */,
 				7869844024A3F841002618E1 /* Main.storyboard */,
 				7869844324A3F844002618E1 /* Assets.xcassets */,
 				7869844524A3F844002618E1 /* LaunchScreen.storyboard */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7828E2A924A88C6300012D6A /* Meme.swift in Sources */,
 				7869843F24A3F841002618E1 /* ViewController.swift in Sources */,
 				7869843D24A3F841002618E1 /* AppDelegate.swift in Sources */,
 			);
@@ -285,6 +289,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22C4JGH4QJ;
 				INFOPLIST_FILE = "MemeMe 1.0/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,6 +308,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 22C4JGH4QJ;
 				INFOPLIST_FILE = "MemeMe 1.0/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
