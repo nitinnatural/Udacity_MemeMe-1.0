@@ -37,17 +37,19 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="548"/>
                                 <color key="backgroundColor" red="0.82056546119999996" green="0.78032277009999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xt2-6M-J06">
-                                <rect key="frame" x="20" y="84" width="335" height="30"/>
+                            <textField opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xt2-6M-J06">
+                                <rect key="frame" x="20" y="84" width="335" height="17"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S6I-0T-yTb">
-                                <rect key="frame" x="20" y="585" width="335" height="30"/>
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S6I-0T-yTb">
+                                <rect key="frame" x="20" y="585" width="335" height="17"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -85,7 +87,9 @@
                         <outlet property="cameraButton" destination="PKb-ff-Asv" id="l3x-7u-wqs"/>
                         <outlet property="cancelButton" destination="lzd-ow-JQ3" id="ZjA-9x-ZId"/>
                         <outlet property="imageView" destination="ruX-PH-SwS" id="5L0-H7-WTD"/>
+                        <outlet property="navigationItem" destination="Ahk-Np-jz4" id="GAd-FI-VJo"/>
                         <outlet property="shareButton" destination="FyH-Ll-BK1" id="sjq-4r-a7U"/>
+                        <outlet property="toolbar" destination="EZ3-2i-neU" id="8Fd-20-rgq"/>
                         <outlet property="topTextField" destination="Xt2-6M-J06" id="nJV-Nl-WpK"/>
                     </connections>
                 </viewController>

@@ -8,11 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    // todo
     // camera fix
-    // attributed text
     // autolayout correction
     // keyboard issue
 
@@ -22,25 +20,83 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var toolbar: UIToolbar!
     
     var memedImage:UIImage! = nil
+    var isEditingCompleted = false
+    
+    let memeTextAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.strokeColor: UIColor.black,
+        NSAttributedString.Key.foregroundColor: UIColor.white,
+        NSAttributedString.Key.backgroundColor: UIColor.white,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSAttributedString.Key.strokeWidth:  4.0
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         topTextField.textAlignment = .center
+        topTextField.contentHorizontalAlignment = .center
+        topTextField.contentVerticalAlignment = .center
+        topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = .center
+        bottomTextField.defaultTextAttributes = memeTextAttributes
     }
 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        subscribeToKeyboardNotification()
+        topTextField.delegate = self
+        bottomTextField.delegate = self
+        subscribeToKeyboardNotification()
+        shareButton.isEnabled = false
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
+
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        switch textField.tag {
+//        case 0:
+//            // top text field
+//
+//        case 1:
+//            // bottom text field
+//        default:
+//            //
+//        }
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.text = ""
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if textField.tag == 1 {
+            unSubscribeFromKeyboardNotificaton()
+        }
+    
+        switch textField.tag {
+        case 0:
+            let text = textField.text
+            if text?.count == 0 {
+                textField.text = "TOP"
+            }
+        case 1:
+             if textField.text?.count == 0 {
+                textField.text = "BOTTOM"
+            }
+       
+        default:
+           return
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        unSubscribeFromKeyboardNotificaton()
+        unSubscribeFromKeyboardNotificaton()
     }
     
     @IBAction func handleCameraClick(_ sender: Any) {
@@ -62,10 +118,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imageView.image = image
         }
         dismiss(animated: true, completion: nil)
+        shareButton.isEnabled = true
     }
     
     
     @IBAction func handleCancelClick(_ sender: Any) {
+        // set the top and bottom text to default
+        // reset the image view
+        // disable the share button.
+        // hide the keyboard if open.
+        shareButton.isEnabled = true
     }
     
     
@@ -77,6 +139,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func subscribeToKeyboardNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func unSubscribeFromKeyboardNotificaton(){
@@ -84,7 +149,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
-        view.frame.origin.y = -getKeyboardHeight(notification)
+        if self.view.frame.origin.y == 0 {self.view.frame.origin.y -= getKeyboardHeight(notification)}
+    }
+    
+    @objc func keyboardWillHide(_ notification:Notification) {
+        if self.view.frame.origin.y != 0{self.view.frame.origin.y += getKeyboardHeight(notification)}
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
@@ -95,10 +164,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func generateMemedImage() -> UIImage {
         // TODO hide the toolbar  and bottom navigation
+        toolbar.isHidden = true
+        
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        
+        toolbar.isHidden = false
         return memedImage
     }
     
