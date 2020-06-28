@@ -11,7 +11,11 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // camera fix
-    // autolayout correction
+    // - attributed string issue background
+    // - share button issue
+    // - handle cancel button
+    // update icons.
+    // handle keyboard enter button.
     // keyboard issue
 
     @IBOutlet weak var imageView: UIImageView!
@@ -20,38 +24,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
-    @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var toolbar: UIToolbar!
     
     var memedImage:UIImage! = nil
     var isEditingCompleted = false
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.backgroundColor: UIColor.white,
+        NSAttributedString.Key.strokeColor: UIColor.yellow,
+        NSAttributedString.Key.foregroundColor: UIColor.orange,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSAttributedString.Key.strokeWidth:  4.0
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        topTextField.delegate = self
+        bottomTextField.delegate = self
         topTextField.textAlignment = .center
-        topTextField.contentHorizontalAlignment = .center
-        topTextField.contentVerticalAlignment = .center
         topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = .center
         bottomTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        
+        shareButton.isEnabled = false
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        imageView.contentMode = .scaleToFill
     }
 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        topTextField.delegate = self
-        bottomTextField.delegate = self
+       
         subscribeToKeyboardNotification()
-        shareButton.isEnabled = false
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        
     }
 
     
@@ -116,10 +122,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image
+            shareButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil)
-        shareButton.isEnabled = true
+        
     }
+    
+    
     
     
     @IBAction func handleCancelClick(_ sender: Any) {
@@ -127,7 +136,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // reset the image view
         // disable the share button.
         // hide the keyboard if open.
-        shareButton.isEnabled = true
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        imageView.image = nil
+        memedImage = nil
+        shareButton.isEnabled = false
     }
     
     

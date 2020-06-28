@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NbZ-pq-IYc">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZ3-2i-neU">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="343" width="667" height="32"/>
                                 <items>
                                     <barButtonItem title="Gallery" id="qqT-2Y-01Y">
                                         <connections>
@@ -34,18 +34,18 @@
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ruX-PH-SwS">
-                                <rect key="frame" x="0.0" y="64" width="375" height="548"/>
-                                <color key="backgroundColor" red="0.82056546119999996" green="0.78032277009999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="0.0" y="32" width="667" height="311"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <textField opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xt2-6M-J06">
-                                <rect key="frame" x="20" y="84" width="335" height="17"/>
+                                <rect key="frame" x="20" y="52" width="627" height="17"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S6I-0T-yTb">
-                                <rect key="frame" x="20" y="585" width="335" height="17"/>
+                                <rect key="frame" x="20" y="306" width="627" height="17"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -56,13 +56,13 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ruX-PH-SwS" secondAttribute="trailing" id="DPj-eW-TyN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="S6I-0T-yTb" secondAttribute="trailing" constant="20" id="KHX-0M-GYH"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ruX-PH-SwS" secondAttribute="bottom" constant="55" id="KiB-kY-nhm"/>
+                            <constraint firstItem="EZ3-2i-neU" firstAttribute="top" secondItem="ruX-PH-SwS" secondAttribute="bottom" id="KiB-kY-nhm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EZ3-2i-neU" secondAttribute="trailing" id="TZ0-3p-3Q0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xt2-6M-J06" secondAttribute="trailing" constant="20" id="eX8-I4-EXg"/>
                             <constraint firstItem="ruX-PH-SwS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="f1J-sV-RBd"/>
                             <constraint firstAttribute="bottom" secondItem="EZ3-2i-neU" secondAttribute="bottom" id="fQf-rg-zCR"/>
                             <constraint firstItem="ruX-PH-SwS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hbD-VM-UAU"/>
-                            <constraint firstItem="S6I-0T-yTb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-82" id="hf0-VN-D91"/>
+                            <constraint firstItem="S6I-0T-yTb" firstAttribute="bottom" secondItem="ruX-PH-SwS" secondAttribute="bottom" constant="-20" id="hf0-VN-D91"/>
                             <constraint firstItem="Xt2-6M-J06" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="jEa-QZ-vGM"/>
                             <constraint firstItem="S6I-0T-yTb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="tHa-I3-YBS"/>
                             <constraint firstItem="EZ3-2i-neU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="x8Y-3o-GjQ"/>
@@ -103,7 +103,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NbZ-pq-IYc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GUE-AA-i6v">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
