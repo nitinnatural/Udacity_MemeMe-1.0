@@ -10,13 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    // camera fix
-    // - attributed string issue background
-    // - share button issue
-    // - handle cancel button
-    // update icons.
-    // handle keyboard enter button.
-    // keyboard issue
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -28,6 +21,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var memedImage:UIImage! = nil
     var isEditingCompleted = false
+    var currentSelectedTextField: UITextField? = nil
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.yellow,
@@ -55,22 +49,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
         subscribeToKeyboardNotification()
-        
     }
 
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-//        switch textField.tag {
-//        case 0:
-//            // top text field
-//
-//        case 1:
-//            // bottom text field
-//        default:
-//            //
-//        }
+        currentSelectedTextField = textField
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -79,10 +63,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        if textField.tag == 1 {
-            unSubscribeFromKeyboardNotificaton()
-        }
-    
         switch textField.tag {
         case 0:
             let text = textField.text
@@ -98,6 +78,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
            return
         }
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -132,10 +117,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     
     @IBAction func handleCancelClick(_ sender: Any) {
-        // set the top and bottom text to default
-        // reset the image view
-        // disable the share button.
-        // hide the keyboard if open.
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
         imageView.image = nil
@@ -162,11 +143,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
-        if self.view.frame.origin.y == 0 {self.view.frame.origin.y -= getKeyboardHeight(notification)}
+        if (currentSelectedTextField != nil && currentSelectedTextField?.tag == 1) {
+            if self.view.frame.origin.y == 0 {self.view.frame.origin.y -= getKeyboardHeight(notification)}
+        }
     }
     
     @objc func keyboardWillHide(_ notification:Notification) {
-        if self.view.frame.origin.y != 0{self.view.frame.origin.y += getKeyboardHeight(notification)}
+       if (currentSelectedTextField != nil && currentSelectedTextField?.tag == 1) {
+            if self.view.frame.origin.y != 0{self.view.frame.origin.y += getKeyboardHeight(notification)}
+        }
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
