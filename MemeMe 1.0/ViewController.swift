@@ -32,20 +32,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        topTextField.delegate = self
-        bottomTextField.delegate = self
-        topTextField.textAlignment = .center
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = .center
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        
+        configureMemeTextField(textField: topTextField, text: "TOP")
+        configureMemeTextField(textField: bottomTextField, text: "BOTTOM")
         shareButton.isEnabled = false
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         imageView.contentMode = .scaleToFill
     }
 
+    func configureMemeTextField(textField: UITextField, text:String){
+        textField.text = text
+        textField.delegate = self
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -91,18 +90,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func handleCameraClick(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .camera
-        present(pickerController, animated: true, completion: nil)
+        pickAnImage(sourceType: .camera)
     }
     
     @IBAction func handleGalleryClick(_ sender: Any) {
+        pickAnImage(sourceType: .photoLibrary)
+    }
+    
+    func pickAnImage(sourceType: UIImagePickerController.SourceType) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
+        pickerController.sourceType = sourceType
         present(pickerController, animated: true, completion: nil)
     }
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
@@ -179,7 +180,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         vc.popoverPresentationController?.sourceView = self.view
         vc.completionWithItemsHandler = {
             (activity, success, items, error) in
-            self.saveMeme() //print("Activity: \(activity) Success: \(success) Items: \(items) Error: \(error)")
+            if success {
+                self.saveMeme()
+            }
         }
         present(vc, animated: true, completion: nil)
         
